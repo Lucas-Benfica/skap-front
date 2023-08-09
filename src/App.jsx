@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { AuthProvider } from "./contexts/AuthContext.jsx"
+import CarsPage from "./pages/CarsPage.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import SignInPage from "./pages/login/SignInPage.jsx"
 import SignUpPage from "./pages/login/SignUpPage.jsx"
@@ -13,7 +14,7 @@ function App() {
           <Route path="/login" element={<SignInPage/>}/>
           <Route path="/cadastro" element={<SignUpPage/>}/>
           <Route path="/" element={<HomePage/>}/>
-          <Route path="/carros" element={<SignInPage/>}/>
+          <Route path="/carros" element={<CarsPage/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
