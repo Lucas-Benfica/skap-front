@@ -29,7 +29,7 @@ function SearchInput() {
 
   const performSearch = () => {
     console.log('Busca realizada:', searchTerm);
-    // Adicione a lógica de busca aqui
+    
   };
 
   return (
