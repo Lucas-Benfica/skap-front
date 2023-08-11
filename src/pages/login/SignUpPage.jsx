@@ -138,7 +138,7 @@ export default function SignUpPage(){
                         <SubmitButton type="button" onClick={() => navigate("/")} disabled={isLoading}>Voltar para home</SubmitButton>
                         <SubmitButton type="submit" disabled={isLoading}>Cadastrar</SubmitButton>                        
                     </SubmitDiv>
-                    <StyledLink to="/">
+                    <StyledLink to="/login">
                         Já tem uma conta? Entre agora!
                     </StyledLink>
                 </StyledForm>

@@ -30,10 +30,9 @@ export const HeaderMain = styled.div`
     padding: 8px;
     img{
         width: 200px;
-        cursor: pointer;
     }
     .options{
-        width: 150px;
+        width: 250px;
         display: flex;
         justify-content: space-between;
         p{

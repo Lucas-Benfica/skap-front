@@ -18,21 +18,7 @@ export default function SignInPage() {
 
     function submitLogin(e){
         e.preventDefault();
-    
-        setIsLoading(true);
         
-        /* Fazer o back e dps ativar aqui!
-        const promise = api.login({...formLogin});
-        promise.then( res => {
-          setIsLoading(false);
-          //login(res.data);
-          //navigate("/home");
-        });
-        promise.catch( err => {
-          setIsLoading(false);
-          //alert(err.response.data);
-        });
-        */
     }
     return (
         <MainDivSingUp>
@@ -70,7 +56,7 @@ export default function SignInPage() {
                         <SubmitButton type="button" onClick={() => navigate("/")} disabled={isLoading}>Voltar para home</SubmitButton>
                         <SubmitButton type="submit" disabled={isLoading}>Entrar</SubmitButton>
                     </SubmitDiv>
-                    <StyledLink to="/">
+                    <StyledLink to="/cadastro">
                         Primeira vez? Cadastre-se!
                     </StyledLink>
                 </StyledForm>

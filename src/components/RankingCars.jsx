@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ContainerRanking } from "../styles/HomeStyles";
+import { ContainerRanking, MiniCard } from "../styles/HomeStyles";
 
 const car = {
     name: "HB20",
@@ -14,42 +14,42 @@ export default function Ranking(){
         <ContainerRanking>
                 <h1>Ofertas mais visualizadas:</h1>
                 <div>
-                    <div>
+                    <MiniCard>
                         <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
                         <p>Hatches</p>
                         <h2>Fiat</h2>
                         <div></div>
-                    </div>
-                    <div>
+                    </MiniCard>
+                    <MiniCard>
                         <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
                         <p>Hatches</p>
                         <h2>Fiat</h2>
                         <div></div>
-                    </div>
-                    <div>
+                    </MiniCard>
+                    <MiniCard>
                         <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
                         <p>Hatches</p>
                         <h2>Fiat</h2>
                         <div></div>
-                    </div>
-                    <div>
+                    </MiniCard>
+                    <MiniCard>
                         <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
                         <p>Hatches</p>
                         <h2>Fiat</h2>
                         <div></div>
-                    </div>
-                    <div>
+                    </MiniCard>
+                    <MiniCard>
                         <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
                         <p>Hatches</p>
                         <h2>Fiat</h2>
                         <div></div>
-                    </div>
-                    <div>
+                    </MiniCard>
+                    <MiniCard>
                         <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
                         <p>Hatches</p>
                         <h2>Fiat</h2>
                         <div></div>
-                    </div>
+                    </MiniCard>
                 </div>
         </ContainerRanking>
     );

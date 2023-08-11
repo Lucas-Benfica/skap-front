@@ -10,7 +10,7 @@ const car = {
   state: "MG",
   brand: "Fiat",
   km: 50000,
-  exchange: "Manual",
+  transmission: "Manual",
   price: 100000,
   images: ["https://s2-autoesporte.glbimg.com/IlvYaWV-ybEPQnrxCRkQ4ilvP8A=/696x390/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2021/E/i/mi4AooTjyoZMf4AkbHGQ/updated-2016-hyundai-hb20-launched-in-brazil-1-liter-turbo-flex-announced-photo-gallery-21.jpg",
     "https://dezeroacem.com.br/wp-content/uploads/2020/05/Hyundai-HB20-Comfort-2017.jpg",
@@ -41,7 +41,7 @@ export default function CarCard() {
         </UpperDiv>
         <LowerDiv>
             <P>{car.city} - {car.state}</P>
-            <P>{car.exchange}</P>
+            <P>{car.transmission}</P>
         </LowerDiv>
       </SecondDiv>
       <ThirdDiv>

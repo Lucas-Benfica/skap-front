@@ -92,47 +92,47 @@ export const ContainerRanking = styled.div`
         width: auto;
         justify-content: space-between;    
         align-items: center;
-        div{
-            width: 176px;
-            height: 220px;
-            border-radius: 8px; 
-            background-color: blue;
-            position: relative;
-            cursor: pointer;
-            p {
-                position: absolute;
-                left: 5px;
-                top: 5px;
-                color: red;
-                font-weight: 500;
-                font-size: 1.3rem;
-                z-index: 3;
-            }
-            h2{
-                position: absolute;
-                left: 5px;
-                top: 25px;
-                color: rgb(255, 255, 255);
-                font-weight: 500;
-                font-size: 1.5rem;
-                z-index: 3;
-            }
-            div{
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 55px;
-                background: rgba(0, 0, 0, 0.4);
-                border-radius: 8px 8px 0 0;
-                z-index: 1;
-            }
-            img{
-                width: 176px;
-                height: 220px;
-                object-fit: cover;
-                border-radius: 8px;
-            }
-        }
     }
 `
+export const MiniCard = styled.div`
+    width: 176px;
+    height: 220px;
+    border-radius: 8px; 
+    background-color: blue;
+    position: relative;
+    cursor: pointer;
+    p {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        color: red;
+        font-weight: 500;
+        font-size: 1.3rem;
+        z-index: 3;
+    }
+    h2{
+        position: absolute;
+        left: 5px;
+        top: 25px;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        font-size: 1.5rem;
+        z-index: 3;
+    }
+    div{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 55px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 8px 8px 0 0;
+        z-index: 1;
+    }
+    img{
+        width: 176px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+`;

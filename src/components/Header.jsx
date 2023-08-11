@@ -8,15 +8,16 @@ export default function Header(){
 
     return (
         <HeaderMain className="main">
-                <img src={logo} onClick={()=>navigate("/")}/>
+                <img src={logo} />
                 <div className="options">
+                    <Link to="/"><p>Home</p></Link>
                     <Link to="/carros"><p>Comprar</p></Link>
-                    <Link to="/vendas"><p>Vender</p></Link>
+                    <Link to="/anuncio"><p>Vender</p></Link>
                 </div>
                 <div className="UserOptions">
                     <div>
-                        <HiUserCircle />
-                        <p>Entrar</p>
+                        <HiUserCircle onClick={()=>navigate("/login")}/>
+                        <Link to="/login"><p>Entrar</p></Link>       
                     </div>
                     <HiHeart />
                 </div>
