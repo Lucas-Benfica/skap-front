@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/skap.png";
 import useAuth from "../../hooks/useAuth.js";
+import api from "../../services/api";
 import { DivForm, DivLogo, MainDivSingUp, StyledForm, StyledLink, SubmitButton, SubmitDiv } from "../../styles/LoginStyle.js";
 
 
@@ -10,7 +11,7 @@ export default function SignInPage() {
     const [formLogin, setFormLogin] = useState({email: '', password: ''});
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-    const {auth, login} = useAuth();
+    const {login} = useAuth();
 
     function setLogin(e){
         setFormLogin({...formLogin, [e.target.name]: e.target.value});
@@ -18,7 +19,18 @@ export default function SignInPage() {
 
     function submitLogin(e){
         e.preventDefault();
-        
+        setIsLoading(true);
+
+        const promise = api.signIn(formLogin);
+        promise.then(res => {
+            setIsLoading(false);
+            login(res.data.token);
+            navigate("/");
+        });
+        promise.catch(err => {
+            setIsLoading(false);
+            alert(err.response.data.message);
+        });
     }
     return (
         <MainDivSingUp>

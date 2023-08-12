@@ -1,36 +1,50 @@
 import { styled } from "styled-components";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "../components/Header";
 import ImagesToSale from "../components/ImagesSale";
 import { ContainerSale } from "../styles/SaleStyle";
 import { AiFillHeart } from "react-icons/ai";
+import api from "../services/api";
+import { useParams } from "react-router-dom";
 
-const car = {
-    name: "HB20",
-    description: "1.0 turbo, muito economico e potente",
-    year: 2023,
-    city: "Betim",
-    state: "MG",
-    brand: "Fiat",
-    km: 50000,
-    transmission: "Manual",
-    price: 100000,
-    fuel: "Flex",
-    plate: "HBR6344",
-    color: "vermelho",
-    motor: "1.0 Turbo",
-    images: ["https://s2-autoesporte.glbimg.com/IlvYaWV-ybEPQnrxCRkQ4ilvP8A=/696x390/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2021/E/i/mi4AooTjyoZMf4AkbHGQ/updated-2016-hyundai-hb20-launched-in-brazil-1-liter-turbo-flex-announced-photo-gallery-21.jpg",
-        "https://dezeroacem.com.br/wp-content/uploads/2020/05/Hyundai-HB20-Comfort-2017.jpg",
-        "https://quatrorodas.abril.com.br/wp-content/uploads/2022/02/Hyundai-HB20-2023-1.jpg?quality=70&strip=info&w=1280&h=720&crop=1"
-    ],
-    vendedor: {
-        name: "lucas soares benfica",
-        email: "lucassoaresbenfica@gmail.com",
-        phoneNumber: "31988668067"
+const ex = {
+    name: "",
+    description: "",
+    year: "",
+    city: "",
+    state: "",
+    brand: "",
+    km: "",
+    transmission: "",
+    price: "",
+    fuel: "",
+    plate: "",
+    color: "",
+    motor: "",
+    photos: [],
+    seller: {
+        name: "",
+        email: "",
+        phoneNumber: ""
     }
-}
+};
 
 export default function CarSale() {
+    const { id } = useParams();
+    const [car, setCar] = useState(ex);
+
+    useEffect(()=>{
+        const promise = api.getCarsById(id);
+        promise.then( (res) => {
+            setCar(res.data);
+            console.log(res.data);
+            console.log(res.data.name);
+        });
+        
+        promise.catch((err) => {
+            alert(err.response.data);
+        });
+    },[])
 
     const [isHeartActive, setIsHeartActive] = useState(false);
 
@@ -44,7 +58,7 @@ export default function CarSale() {
             <Header />
             <Body>
                 <CardCarSale>
-                    <ImagesToSale images={car.images} />
+                    <ImagesToSale images={car.photos} />
                     <InfoDiv>
                         <InfoSection>
                             <div>
@@ -69,7 +83,7 @@ export default function CarSale() {
                         <InfoSection>
                             <div>
                                 <InfoHeader>Motor:</InfoHeader>
-                                <InfoValue>{car.motor}</InfoValue>
+                                <InfoValue>{car.engine}</InfoValue>
                             </div>
                             <div>
                                 <InfoHeader>Combustível:</InfoHeader>
@@ -103,9 +117,9 @@ export default function CarSale() {
                         <ContactSection>
                             <ContactInfo>
                                 <p>Vendedor</p>
-                                <p>- Nome: {car.vendedor.name}</p>
-                                <p>- Email: {car.vendedor.email}</p>
-                                <p>- Telefone: {car.vendedor.phoneNumber}</p>
+                                <p>- Nome: {car.seller.name}</p>
+                                <p>- Email: {car.seller.email}</p>
+                                <p>- Telefone: {car.seller.phoneNumber}</p>
                                 <div className="heart-icon" onClick={toggleHeart}>
                                     <AiFillHeart className={isHeartActive ? "active" : ""} />
                                 </div>

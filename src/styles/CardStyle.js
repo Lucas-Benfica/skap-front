@@ -32,6 +32,7 @@ export const SecondDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 10px 0 10px;
+  cursor: pointer;
 `;
 
 export const UpperDiv = styled.div`

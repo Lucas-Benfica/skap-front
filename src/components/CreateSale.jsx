@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import api from '../services/api';
 import { SubmitButton } from '../styles/LoginStyle';
 import { ButtonAddPhoto, FormCreateCar, InputWithButton } from '../styles/SaleStyle';
 
@@ -12,16 +15,21 @@ export default function CarForm() {
   const [formData, setFormData] = useState({
     name: "",
     brand: "",
+    category: "",
     city: "",
     state: "",
     year: "",
     km: "",
     transmission: "",
+    engine: "",
     fuel: "",
     color: "",
+    plate: "",
     price: "",
     photos: [],
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -44,8 +52,26 @@ export default function CarForm() {
     setFormData({ ...formData, photos: updatedPhotos });
   };
 
+  const {auth} = useAuth();
+
+  function submitCar(e){
+    e.preventDefault();
+    setIsLoading(true);
+    console.log(formData);
+    const promise = api.createCar(formData, auth);
+        promise.then(res => {
+            setIsLoading(false);
+            alert("Anúncio criado com sucesso.");
+            navigate("/");
+        });
+        promise.catch(err => {
+            setIsLoading(false);
+            alert(err.response.data.message);
+        });
+  }
+
   return (
-    <FormCreateCar>
+    <FormCreateCar onSubmit={submitCar}>
       <h1>Vamos começar seu anúncio?</h1>
       <form>
         <label>Modelo:</label>
@@ -57,12 +83,42 @@ export default function CarForm() {
         />
 
         <label>Marca:</label>
-        <input
-          type="text"
+        <select
           name="brand"
           value={formData.brand}
           onChange={handleInputChange}
-        />
+        >
+          <option value="">Selecione a marca</option>
+          <option value="Toyota">Toyota</option>
+          <option value="Volkswagen">Volkswagen</option>
+          <option value="Chevrolet">Chevrolet</option>
+          <option value="Ford">Ford</option>
+          <option value="Honda">Honda</option>
+          <option value="Nissan">Nissan</option>
+          <option value="Hyundai">Hyundai</option>
+          <option value="Renault">Renault</option>
+          <option value="Jeep">Jeep</option>
+          <option value="Fiat">Fiat</option>
+          <option value="Mitsubishi">Mitsubishi</option>
+          <option value="Mercedes-Benz">Mercedes-Benz</option>
+          <option value="BMW">BMW</option>
+          <option value="Audi">Audi</option>
+          <option value="Tesla">Tesla</option>
+        </select>
+
+        <label>Categoria:</label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleInputChange}
+        >
+          <option value="">Selecione a categoria</option>
+          <option value="Hatches">Hatches</option>
+          <option value="Sedans">Sedans</option>
+          <option value="Picape">Picape</option>
+          <option value="SUV">SUV</option>
+          <option value="Eletrico">Elétrico</option>
+        </select>
 
         <label>Cidade:</label>
         <input
@@ -108,7 +164,7 @@ export default function CarForm() {
         >
           <option value="">Selecione o câmbio</option>
           <option value="manual">Manual</option>
-          <option value="automatic">Automático</option>
+          <option value="automático">Automático</option>
         </select>
 
         <label>Combustível:</label>
@@ -118,9 +174,11 @@ export default function CarForm() {
           onChange={handleInputChange}
         >
           <option value="">Selecione o Combustível</option>
-          <option value="gasoline">Gasolina</option>
-          <option value="ethanol">Etanol</option>
+          <option value="Gasolina">Gasolina</option>
+          <option value="Etanol">Etanol</option>
           <option value="flex">Flex</option>
+          <option value="Híbrido">Híbrido</option>
+          <option value="Elétrico">Elétrico</option>
         </select>
 
         <label>Cor:</label>
@@ -178,7 +236,7 @@ export default function CarForm() {
         ))}
         <ButtonAddPhoto type="button" onClick={handleAddPhoto}>Adicionar Foto</ButtonAddPhoto>
 
-        <SubmitButton type="submit">Submit</SubmitButton>
+        <SubmitButton type="submit" disabled={isLoading}>Submit</SubmitButton>
       </form>
     </FormCreateCar>
   );

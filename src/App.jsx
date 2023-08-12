@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Header from "./components/Header.jsx"
 import { AuthProvider } from "./contexts/AuthContext.jsx"
 import CarSale from "./pages/CarSalePage.jsx"
 import CarsPage from "./pages/CarsPage.jsx"
@@ -33,4 +34,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

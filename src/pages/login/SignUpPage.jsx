@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "../../assets/skap.png";
 import { DivForm, DivLogo, MainDivSingUp, StyledForm, StyledLink, SubmitButton, SubmitDiv } from "../../styles/LoginStyle.js";
 import { useNavigate } from "react-router-dom"
+import api from "../../services/api";
 
 
 export default function SignUpPage(){
@@ -28,30 +29,28 @@ export default function SignUpPage(){
         e.preventDefault();
         setIsLoading(true);
         console.log(formCadastro);
-        /*
+        
         if(formCadastro.password != formCadastro.confirmPass){
         alert("As senhas estão diferentes!");
         setFormCadastro({...formCadastro, confirmPass: ""});
         setIsLoading(false);
         return;
         }
-
-        const promise = api.singUp({
-        name: formCadastro.name,
-        email: formCadastro.email,
-        password: formCadastro.password
-        });
+        const info =  formCadastro;
+        delete info.confirmPass;
+        const promise = api.signUp(info);
 
         promise.then(() => {
+        console.log("DEU CERTO AQUI");
         setIsLoading(false);
-        navigate("/");
+        navigate("/login");
         });
 
         promise.catch((err) => {
         alert(err.response.data);
         setIsLoading(false);
         });
-        */
+        
     }
 
     return (
