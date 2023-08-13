@@ -5,7 +5,8 @@ import ImagesToSale from "../components/ImagesSale";
 import { ContainerSale } from "../styles/SaleStyle";
 import { AiFillHeart } from "react-icons/ai";
 import api from "../services/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const ex = {
     name: "",
@@ -33,24 +34,61 @@ export default function CarSale() {
     const { id } = useParams();
     const [car, setCar] = useState(ex);
 
-    useEffect(()=>{
+    const { auth } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(auth);
         const promise = api.getCarsById(id);
-        promise.then( (res) => {
+        promise.then((res) => {
             setCar(res.data);
-            console.log(res.data);
-            console.log(res.data.views);
+            if (auth) {
+                const promise = api.isFavorite(res.data.id, auth);
+                promise.then((res) => {
+                    console.log(res.data);
+                    console.log(res.data.favoriteCar);
+                    const isFavoriteCar = false;
+                    if (isFavoriteCar) {
+                        setIsHeartActive(true);
+                    }
+                });
+                promise.catch((err) => {
+                    alert(err.response.data);
+                });
+            }
         });
-        
         promise.catch((err) => {
             alert(err.response.data);
         });
-    },[])
+    }, [])
 
     const [isHeartActive, setIsHeartActive] = useState(false);
 
-    const toggleHeart = () => {
-        console.log(isHeartActive)
-        setIsHeartActive(!isHeartActive);
+    function toggleHeart(id) {
+        if (!auth) {
+            alert("Você precisa estar logado para adicionar aos favoritos.");
+            navigate("/login");
+            return;
+        }
+        if (!isHeartActive) {
+            const promise = api.addFavorites(id, auth);
+            promise.then((res) => {
+                alert(res.data);
+                setIsHeartActive(true);
+            });
+            promise.catch((err) => {
+                alert(err.response.data);
+            });
+        }
+        else if (isHeartActive) {
+            const promise = api.removeFavorites(id, auth);
+            promise.then((res) => {
+                setIsHeartActive(false);
+            });
+            promise.catch((err) => {
+                alert(err.response.data);
+            });
+        }
     };
 
     return (
@@ -120,7 +158,7 @@ export default function CarSale() {
                                 <p>- Nome: {car.seller.name}</p>
                                 <p>- Email: {car.seller.email}</p>
                                 <p>- Telefone: {car.seller.phoneNumber}</p>
-                                <div className="heart-icon" onClick={toggleHeart}>
+                                <div className="heart-icon" onClick={() => toggleHeart(car.id)}>
                                     <AiFillHeart className={isHeartActive ? "active" : ""} />
                                 </div>
                             </ContactInfo>

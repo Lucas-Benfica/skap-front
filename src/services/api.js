@@ -23,6 +23,18 @@ function createCar(body, token){
     return promise;
 }
 
+function addFavorites(id, token){
+    const config = createConfig(token);
+    const promise = axios.post(`${URL}/favorites/add/${id}`, config);
+    return promise;
+}
+
+function removeFavorites(id, token){
+    const config = createConfig(token);
+    const promise = axios.post(`${URL}/favorites/remove/${id}`, config);
+    return promise;
+}
+
 //Gets
 function getCarsList(){
     const promise = axios.get(`${URL}/cars`);
@@ -41,6 +53,11 @@ function getCarsRanking(){
     const promise = axios.get(`${URL}/ranking`);
     return promise;
 }
+function isFavorite(id, token){
+    const config = createConfig(token);
+    const promise = axios.get(`${URL}/favorite/${id}`, config);
+    return promise;
+}
 
 
 
@@ -51,7 +68,10 @@ const api = {
     createCar,
     getCarsList,
     getCarsById,
-    getCarsRanking 
+    getCarsRanking,
+    addFavorites,
+    removeFavorites,
+    isFavorite
 };
 
 export default api;

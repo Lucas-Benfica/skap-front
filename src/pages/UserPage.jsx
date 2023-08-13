@@ -1,10 +1,12 @@
 import { styled } from "styled-components";
 import Header from "../components/Header";
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiHeart } from 'react-icons/fi';
-import { FaCar } from 'react-icons/fa';
+import { FiHeart, FiLogOut } from 'react-icons/fi';
+import { FaCar, FaUser } from 'react-icons/fa';
 
 export default function UserPage() {
+    const [selectedOption, setSelectedOption] = useState("Favoritos");
 
     return (
         <ContainerSale>
@@ -14,23 +16,48 @@ export default function UserPage() {
                     <InfoUser>
                         <h1>Lucas Soares Benfica</h1>
                         <h2>lucassoaresbenfica@gmail.com</h2>
+                        <h2>12346579812</h2>
+                        <h2>31985685685</h2>
                         <div></div>
                     </InfoUser>
                     <MenuDiv>
-                    <OptionDiv>
-                        <FiHeart size={IconSize} color="red" />
-                        <Link to="/usuario/favoritos">Favoritos</Link>
-                    </OptionDiv>
-                    <OptionDiv>
-                        <FaCar size={IconSize} color="blue" /> {/* Use FaCar here */}
-                        <Link to="/usuario/meus-anuncios">Meus anúncios</Link>
-                    </OptionDiv>
+                        <OptionDiv>
+                            <FiHeart size={IconSize} color="red" />
+                            <Link
+                                to="/usuario/favoritos"
+                                onClick={() => setSelectedOption("Favoritos")}
+                                style={{ textDecoration: selectedOption === "Favoritos" ? "underline red" : "none" }}
+                            >
+                                Favoritos
+                            </Link>
+                        </OptionDiv>
+                        <OptionDiv>
+                            <FaCar size={IconSize} color="blue" />
+                            <Link
+                                to="/usuario/meus-anuncios"
+                                onClick={() => setSelectedOption("Meus Anúncios")}
+                                style={{ textDecoration: selectedOption === "Meus Anúncios" ? "underline red" : "none" }}
+                            >
+                                Meus Anúncios
+                            </Link>
+                        </OptionDiv>
+                        <OptionDiv>
+                            <FiLogOut size={IconSize} color="orange" />
+                            <Link
+                                to="/sair"
+                                onClick={() => setSelectedOption("Sair")}
+                                style={{ textDecoration: selectedOption === "Sair" ? "underline red" : "none" }}
+                            >
+                                Sair
+                            </Link>
+                        </OptionDiv>
                     </MenuDiv>
                 </Options>
             </ContainerUserInfo>
         </ContainerSale>
     );
 }
+
 
 const ContainerSale = styled.div`
     width: 100vw; 
@@ -57,7 +84,7 @@ const Options = styled.div`
 `
 const InfoUser = styled.div`
     width: 100%; 
-    height: 20%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,8 +110,8 @@ const OptionDiv = styled.div`
   gap: 5px;
 
   a {
-    text-decoration: none; /* Remove a decoração de texto do Link */
-    color: inherit; /* Mantém a cor padrão do pai (OptionDiv) */
+    text-decoration: none; 
+    color: inherit; 
     }
 `;
 

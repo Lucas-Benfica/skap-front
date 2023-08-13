@@ -1,7 +1,7 @@
 import SearchInput from "../components/SearchInput";
 import { IoSwapVertical } from "react-icons/io5";
 import CarCard from "../components/CardCar";
-import { ContainerPageCarros, ContainerProdutos, HeaderMain, SecondHeader, StyledIcon } from "../styles/CarsPageStyle";
+import { ContainerPageCarros, ContainerProdutos, SecondHeader, StyledIcon } from "../styles/CarsPageStyle";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import api from "../services/api";
