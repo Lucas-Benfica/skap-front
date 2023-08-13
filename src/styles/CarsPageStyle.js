@@ -3,7 +3,7 @@ import { IoIosOptions } from "react-icons/io";
 
 export const ContainerPageCarros = styled.div`
     width: 100vw; 
-    height: 100%;
+    height: 100vh;
     padding-bottom: 200px;
     display: flex;
     flex-direction: column;
@@ -100,7 +100,8 @@ export const StyledIcon = styled(IoIosOptions)`
 
 export const ContainerProdutos = styled.div`
     width: 100%;
-    height: 100%;
+    height: auto;
+    background: #f5f4f4;
     margin-top: 150px;
     display: flex;
     flex-direction: column;

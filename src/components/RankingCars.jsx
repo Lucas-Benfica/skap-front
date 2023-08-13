@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../services/api";
 import { ContainerRanking, MiniCard } from "../styles/HomeStyles";
+import MiniCardCar from "./MiniCardCar";
 
 const car = {
     name: "HB20",
@@ -8,48 +10,27 @@ const car = {
 }
 
 export default function Ranking(){
-    const navigate = useNavigate();
+
+    const [miniCar, setMiniCar] = useState([]);
+
+    useEffect(()=>{
+        const promise = api.getCarsRanking();
+        promise.then( (res) => {
+            setMiniCar(res.data);
+        });
+        
+        promise.catch((err) => {
+            alert(err.response.data);
+        });
+       
+    }, [])
+    
 
     return (
         <ContainerRanking>
                 <h1>Ofertas mais visualizadas:</h1>
                 <div>
-                    <MiniCard>
-                        <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
-                        <p>Hatches</p>
-                        <h2>Fiat</h2>
-                        <div></div>
-                    </MiniCard>
-                    <MiniCard>
-                        <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
-                        <p>Hatches</p>
-                        <h2>Fiat</h2>
-                        <div></div>
-                    </MiniCard>
-                    <MiniCard>
-                        <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
-                        <p>Hatches</p>
-                        <h2>Fiat</h2>
-                        <div></div>
-                    </MiniCard>
-                    <MiniCard>
-                        <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
-                        <p>Hatches</p>
-                        <h2>Fiat</h2>
-                        <div></div>
-                    </MiniCard>
-                    <MiniCard>
-                        <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
-                        <p>Hatches</p>
-                        <h2>Fiat</h2>
-                        <div></div>
-                    </MiniCard>
-                    <MiniCard>
-                        <img src="https://conteudo.imguol.com.br/c/entretenimento/cd/2020/09/30/hyundai-hb20-sense-1601515945848_v2_4x3.jpg" />
-                        <p>Hatches</p>
-                        <h2>Fiat</h2>
-                        <div></div>
-                    </MiniCard>
+                    {miniCar.map((car) => <MiniCardCar key={car.id} id={car.id} car={car} />)}
                 </div>
         </ContainerRanking>
     );

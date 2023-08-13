@@ -105,7 +105,7 @@ export const MiniCard = styled.div`
         position: absolute;
         left: 5px;
         top: 5px;
-        color: red;
+        color: white;
         font-weight: 500;
         font-size: 1.3rem;
         z-index: 3;

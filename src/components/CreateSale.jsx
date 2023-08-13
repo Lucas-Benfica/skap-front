@@ -115,9 +115,9 @@ export default function CarForm() {
           <option value="">Selecione a categoria</option>
           <option value="Hatches">Hatches</option>
           <option value="Sedans">Sedans</option>
-          <option value="Picape">Picape</option>
-          <option value="SUV">SUV</option>
-          <option value="Eletrico">Elétrico</option>
+          <option value="Picape">Picapes</option>
+          <option value="SUV">SUVs</option>
+          <option value="Eletrico">Elétricos</option>
         </select>
 
         <label>Cidade:</label>
@@ -177,6 +177,7 @@ export default function CarForm() {
           <option value="Gasolina">Gasolina</option>
           <option value="Etanol">Etanol</option>
           <option value="flex">Flex</option>
+          <option value="Diesel">Diesel</option>
           <option value="Híbrido">Híbrido</option>
           <option value="Elétrico">Elétrico</option>
         </select>

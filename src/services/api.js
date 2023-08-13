@@ -38,7 +38,7 @@ function getCarsById(id){
     return promise;
 }
 function getCarsRanking(){
-    const promise = axios.get(`${URL}/cars/ranking`);
+    const promise = axios.get(`${URL}/ranking`);
     return promise;
 }
 

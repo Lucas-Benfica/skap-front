@@ -38,7 +38,7 @@ export default function CarSale() {
         promise.then( (res) => {
             setCar(res.data);
             console.log(res.data);
-            console.log(res.data.name);
+            console.log(res.data.views);
         });
         
         promise.catch((err) => {

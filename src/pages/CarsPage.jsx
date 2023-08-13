@@ -5,23 +5,34 @@ import { ContainerPageCarros, ContainerProdutos, HeaderMain, SecondHeader, Style
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { useParams } from "react-router-dom";
 
 export default function CarsPage(){
+    
+    const { filtro } = useParams();
 
     const [cars, setCars] = useState([]);
     
     useEffect(()=>{
         const promise = api.getCarsList();
+         
         promise.then( (res) => {
-            setCars(res.data);
-            console.log(res.data);
+            
+            if(filtro){
+                const filterList = res.data.filter( car => car.category == filtro);
+                setCars(filterList);
+            }
+            else{
+                setCars(res.data);
+            }
+            
         });
         
         promise.catch((err) => {
             alert(err.response.data);
         });
        
-    }, [])
+    }, []);
 
     return (
         <ContainerPageCarros> 
