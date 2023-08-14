@@ -1,21 +1,24 @@
 import { styled } from "styled-components";
 import Header from "../components/Header";
 import { useEffect, useState } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate, useParams} from 'react-router-dom';
 import { FiHeart, FiLogOut } from 'react-icons/fi';
 import { FaCar} from 'react-icons/fa';
 import api from "../services/api";
 import useAuth from "../hooks/useAuth";
-import CarCard from "../components/CardCar";
+import DivCarsUser from "../components/UserCars";
 
 export default function UserPage() {
-    const [selectedOption, setSelectedOption] = useState("favoritos");
+    const [selectedOption, setSelectedOption] = useState("");
     const [user, setUser] = useState({name:'',email:'',cpf:'',phoneNumber:'',userSales:[],favorites:[]});
     const { auth } = useAuth();
+    const {info} = useParams();
 
     const navigate = useNavigate()
 
     useEffect(()=>{
+        setSelectedOption(info);
+
         const promise = api.getUserById(auth);
         promise.then( (res) => {
             setUser(res.data);
@@ -75,13 +78,7 @@ export default function UserPage() {
                         </OptionDiv>
                     </MenuDiv>
                 </Options>
-                <List>
-                {(selectedOption === 'favoritos') ?
-                user.favorites.map((car) => <CarCard key={car.id} id={car.id} car={car} />)
-                :
-                user.userSales.map((car) => <CarCard key={car.id} id={car.id} car={car} />)
-                }
-                </List>
+                <DivCarsUser selectedOption={selectedOption} user={user} />
             </ContainerUserInfo>
 
         </ContainerSale>
@@ -164,11 +161,3 @@ const OptionDiv = styled.div`
 
 const IconSize = 20;
 
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 83%;
-  padding: 30px;
-`;

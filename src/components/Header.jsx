@@ -1,7 +1,7 @@
 import { HeaderMain } from "../styles/CarsPageStyle";
 import { HiUserCircle, HiHeart } from "react-icons/hi";
 import logo from "../assets/skap2.png"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 
@@ -22,12 +22,20 @@ export default function Header(){
             navigate("/login");
         }
     }
+
+    const location = useLocation();
+    
+    const handleReload = () => {
+        if (location.pathname === '/carros') {
+        window.location.reload();
+        }
+    };
     return (
         <HeaderMain className="main">
                 <img src={logo} />
                 <div className="options">
                     <Link to="/"><p>Home</p></Link>
-                    <Link to="/carros"><p>Comprar</p></Link>
+                    <Link to="/carros"><p onClick={handleReload}>Comprar</p></Link>
                     <p onClick={toSale}>Vender</p>
                 </div>
                 <div className="UserOptions">

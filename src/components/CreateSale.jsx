@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import api from '../services/api';
@@ -11,7 +11,8 @@ const statesList = [
   "RS", "RO", "RR", "SC", "SP", "SE", "TO"
 ];
 
-export default function CarForm() {
+export default function CarForm({car, edit}) {
+  
   const [formData, setFormData] = useState({
     name: "",
     brand: "",
@@ -28,6 +29,13 @@ export default function CarForm() {
     price: "",
     photos: [],
   });
+  
+  useEffect(()=>{
+    if(car){
+      setFormData(car);
+    }
+  }, [car])
+
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -68,9 +76,24 @@ export default function CarForm() {
             alert(err.response.data.message);
         });
   }
+  function editCar(e){
+    e.preventDefault();
+    console.log("EDIT");
+    setIsLoading(true);
+    const promise = api.updateCar(formData, auth, car.id);
+        promise.then(res => {
+            setIsLoading(false);
+            alert("Anúncio modificado com sucesso.");
+            navigate("/");
+        });
+        promise.catch(err => {
+            setIsLoading(false);
+            alert(err.response.data.message);
+        });
+  }
 
   return (
-    <FormCreateCar onSubmit={submitCar}>
+    <FormCreateCar onSubmit={(!edit) ? submitCar : editCar}>
       <h1>Vamos começar seu anúncio?</h1>
       <form>
         <label>Modelo:</label>

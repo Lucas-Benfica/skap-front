@@ -20,21 +20,23 @@ export const SearchContainer = styled.div`
     justify-content: space-around;
 
     h1{
-        width: 115px;
-        font-size: 18px;
+        width: 100%;
+        font-size: 20px;
         color: black;
         border-bottom: solid 2px red;
     }
     div{
         display: flex;
         width: 100%;
-    }
-    input{
-        width: 580px;
-        height: 45px;
+        align-items: center;
+        div{
+            width: 60%;
+            height: 45px;
+            font-size: 18px;
+        }
     }
     button{
-        width: 350px;
+        width: 40%;
         height: 45px;
     }
 `

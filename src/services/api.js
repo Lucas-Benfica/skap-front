@@ -37,6 +37,25 @@ function removeFavorites(id, token){
     return promise;
 }
 
+function processSale(id, token, action){
+    const config = createConfig(token);
+    const body = {sell: action};
+    const promise = axios.post(`${URL}/cars-user/${id}`, body, config);
+    return promise;
+}
+
+function deleteSale(id, token){
+    const config = createConfig(token);
+    const promise = axios.delete(`${URL}/cars/${id}`, config);
+    return promise;
+}
+
+function updateCar(body, token, id){
+    const config = createConfig(token);
+    const promise = axios.post(`${URL}/cars/${id}`, body, config);
+    return promise;
+}
+
 //Gets
 function getCarsList(){
     const promise = axios.get(`${URL}/cars`);
@@ -60,7 +79,10 @@ function isFavorite(id, token){
     const promise = axios.get(`${URL}/favorite/${id}`, config);
     return promise;
 }
-
+function getCarsSearch(item){
+    const promise = axios.get(`${URL}/search?term=${item}`);
+    return promise;
+}
 
 
 const api = {
@@ -73,7 +95,11 @@ const api = {
     getCarsRanking,
     addFavorites,
     removeFavorites,
-    isFavorite
+    isFavorite,
+    getCarsSearch,
+    processSale,
+    deleteSale,
+    updateCar
 };
 
 export default api;
