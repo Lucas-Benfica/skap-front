@@ -57,7 +57,7 @@ export default function CarsPage({ cars, setCars }) {
                 <Header/>
                 <SecondHeader>
                     <div>
-                        <StyledIcon />
+                        {/*<StyledIcon />*/}
                     </div>
                     <SearchInput setCars={setCars} />
                     <OrderList setOrder={setOrder} />
