@@ -1,18 +1,20 @@
 import { styled } from "styled-components";
 import Header from "../components/Header";
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { FiHeart, FiLogOut } from 'react-icons/fi';
-import { FaCar, FaUser } from 'react-icons/fa';
+import { FaCar} from 'react-icons/fa';
 import api from "../services/api";
 import useAuth from "../hooks/useAuth";
 import CarCard from "../components/CardCar";
 
 export default function UserPage() {
     const [selectedOption, setSelectedOption] = useState("favoritos");
-    const info = useParams();
     const [user, setUser] = useState({name:'',email:'',cpf:'',phoneNumber:'',userSales:[],favorites:[]});
     const { auth } = useAuth();
+
+    const navigate = useNavigate()
+
     useEffect(()=>{
         const promise = api.getUserById(auth);
         promise.then( (res) => {
@@ -23,7 +25,14 @@ export default function UserPage() {
         });
     },[]);
 
-
+    function logout(){
+        const shouldLogout = window.confirm("Deseja sair?");
+        if (shouldLogout) {
+            localStorage.removeItem("auth"); 
+            navigate("/"); 
+            window.location.reload();
+        }
+    }
 
     return (
         <ContainerSale>
@@ -60,13 +69,9 @@ export default function UserPage() {
                         </OptionDiv>
                         <OptionDiv>
                             <FiLogOut size={IconSize} color="orange" />
-                            <Link
-                                to="/sair"
-                                onClick={() => setSelectedOption("Sair")}
-                                style={{ textDecoration: selectedOption === "Sair" ? "underline red" : "none" }}
-                            >
+                            <p onClick={logout}>
                                 Sair
-                            </Link>
+                            </p>
                         </OptionDiv>
                     </MenuDiv>
                 </Options>
@@ -151,6 +156,9 @@ const OptionDiv = styled.div`
   a {
     text-decoration: none; 
     color: inherit; 
+    }
+    p{
+        cursor: pointer;
     }
 `;
 
