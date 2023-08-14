@@ -14,7 +14,6 @@ export default function EditSale(){
         const promise = api.getCarsById(id);
         promise.then((res) => {
             setCar(res.data);
-            console.log(res.data);
         });
         promise.catch((err) => {
             alert(err.response.data);

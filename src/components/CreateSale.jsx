@@ -78,7 +78,6 @@ export default function CarForm({car, edit}) {
   }
   function editCar(e){
     e.preventDefault();
-    console.log("EDIT");
     setIsLoading(true);
     const promise = api.updateCar(formData, auth, car.id);
         promise.then(res => {

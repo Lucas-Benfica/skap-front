@@ -12,12 +12,10 @@ export default function CarList({ user }) {
     const navigate = useNavigate();
 
     const handleEdit = (carId) => {
-        console.log("edit")
         navigate(`/editar/${carId}`);
     };
 
     const handleDelete = (carId) => {
-        console.log("excluir");
         const promise = api.deleteSale(carId, auth);
             promise.then((res) => {
                 alert(res.data);

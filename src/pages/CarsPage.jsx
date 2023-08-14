@@ -14,7 +14,6 @@ export default function CarsPage({ cars, setCars }) {
     const [order, setOrder] = useState();
 
     useEffect(() => {
-        console.log(cars);
 
         const promise = api.getCarsList();
         promise.then((res) => {
@@ -25,7 +24,6 @@ export default function CarsPage({ cars, setCars }) {
             else {
                 setCars(res.data);
                 setCarsList(res.data);
-                console.log(res.data);
             }
         });
         promise.catch((err) => {
