@@ -2,9 +2,8 @@ import { styled } from "styled-components";
 import { IoIosOptions } from "react-icons/io";
 
 export const ContainerPageCarros = styled.div`
-    width: 100vw; 
+    width: 100%; 
     height: 100vh;
-    padding-bottom: 200px;
     display: flex;
     flex-direction: column;
     background: #f5f4f4;
@@ -56,7 +55,7 @@ export const HeaderMain = styled.div`
         }
     }
     a {
-        text-decoration: none; /* Remove sublinhado */
+        text-decoration: none; 
         color: inherit; /* Herda a cor do texto do elemento pai */
     }
 `;
@@ -80,7 +79,8 @@ export const SecondHeader = styled.div`
     div{
         width: 220px;
         align-items: center;
-        gap: 10px;   
+        gap: 10px;
+        position: relative;  
         & svg {
                 color: #000000; 
                 font-size: 24px; 
@@ -90,6 +90,12 @@ export const SecondHeader = styled.div`
     .last{
         display: flex;
         justify-content: end;
+    }
+    select{
+        position: absolute;
+        right: 15px;
+        top: 45px;
+        
     }
 `;
 
@@ -102,11 +108,12 @@ export const ContainerProdutos = styled.div`
     width: 100%;
     height: auto;
     background: #f5f4f4;
-    margin-top: 150px;
+    padding: 150px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    
 
     & > h1{
         font-size: 20px;

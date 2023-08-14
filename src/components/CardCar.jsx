@@ -5,6 +5,7 @@ import ImagesToCard from './ImagesCars';
 
 export default function CarCard({car}) {
   const navigate = useNavigate();
+  
   return (
     <CardStyled>
       <ImagesToCard images={car.photos} />
