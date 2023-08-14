@@ -57,7 +57,6 @@ export default function CarForm() {
   function submitCar(e){
     e.preventDefault();
     setIsLoading(true);
-    console.log(formData);
     const promise = api.createCar(formData, auth);
         promise.then(res => {
             setIsLoading(false);

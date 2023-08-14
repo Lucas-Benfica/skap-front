@@ -26,7 +26,6 @@ function App() {
           
           <Route path="/anuncio" element={<Sale/>}/>
 
-          <Route path="/usuario" element={<UserPage/>}/>
           <Route path="/usuario/:info" element={<UserPage/>}/>
         </Routes>
       </BrowserRouter>

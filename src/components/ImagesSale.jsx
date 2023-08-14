@@ -1,10 +1,13 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { ArrowButton, FirstImage } from "../styles/CardStyle";
+import { ArrowButton } from "../styles/CardStyle";
 import { styled } from "styled-components";
+import { AiFillHeart } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import api from '../services/api';
 
-
-export default function ImagesToSale ({ images }) {
+export default function ImagesToSale({ images, id, isHeartActive, setIsHeartActive }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const nextImage = () => {
@@ -17,6 +20,36 @@ export default function ImagesToSale ({ images }) {
         );
     };
 
+    const { auth } = useAuth();
+    const navigate = useNavigate();
+
+    function toggleHeart(id) {
+        if (!auth) {
+            alert("Você precisa estar logado para adicionar aos favoritos.");
+            navigate("/login");
+            return;
+        }
+        if (!isHeartActive) {
+            const promise = api.addFavorites(id, auth);
+            promise.then((res) => {
+                alert(res.data);
+                setIsHeartActive(true);
+            });
+            promise.catch((err) => {
+                alert(err.response.data);
+            });
+        }
+        else if (isHeartActive) {
+            const promise = api.removeFavorites(id, auth);
+            promise.then((res) => {
+                setIsHeartActive(false);
+            });
+            promise.catch((err) => {
+                alert(err.response.data);
+            });
+        }
+    };
+
     return (
         <ImageBox>
             <ImageSaleCar src={images[currentImageIndex]} alt="Image" />
@@ -26,6 +59,9 @@ export default function ImagesToSale ({ images }) {
             <ArrowButton onClick={nextImage} style={{ right: '0' }}>
                 <FiChevronRight />
             </ArrowButton>
+            <div className="heart-icon" onClick={() => toggleHeart(id)}>
+                <AiFillHeart className={isHeartActive ? "active" : ""} />
+            </div>
         </ImageBox>
     );
 }
@@ -47,4 +83,18 @@ export const ImageBox = styled.div`
     display: flex;
     align-items: center;
     background-color: #e1e0e0;
+    position: relative;
+
+    .heart-icon {
+        cursor: pointer;
+        transition: color 0.3s;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 25px;
+    }
+
+    .heart-icon .active {
+        color: red;
+    }
 `

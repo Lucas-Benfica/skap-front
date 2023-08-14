@@ -1,12 +1,29 @@
 import { styled } from "styled-components";
 import Header from "../components/Header";
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { FiHeart, FiLogOut } from 'react-icons/fi';
 import { FaCar, FaUser } from 'react-icons/fa';
+import api from "../services/api";
+import useAuth from "../hooks/useAuth";
+import CarCard from "../components/CardCar";
 
 export default function UserPage() {
-    const [selectedOption, setSelectedOption] = useState("Favoritos");
+    const [selectedOption, setSelectedOption] = useState("favoritos");
+    const info = useParams();
+    const [user, setUser] = useState({name:'',email:'',cpf:'',phoneNumber:'',userSales:[],favorites:[]});
+    const { auth } = useAuth();
+    useEffect(()=>{
+        const promise = api.getUserById(auth);
+        promise.then( (res) => {
+            setUser(res.data);
+        });
+        promise.catch((err) => {
+            alert(err.response.data);
+        });
+    },[]);
+
+
 
     return (
         <ContainerSale>
@@ -14,10 +31,10 @@ export default function UserPage() {
             <ContainerUserInfo>
                 <Options>
                     <InfoUser>
-                        <h1>Lucas Soares Benfica</h1>
-                        <h2>lucassoaresbenfica@gmail.com</h2>
-                        <h2>12346579812</h2>
-                        <h2>31985685685</h2>
+                        <h1>{user.name}</h1>
+                        <h2>{user.email}</h2>
+                        <h2>{formatCPF(user.cpf)}</h2>
+                        <h2>{formatPhoneNumber(user.phoneNumber)}</h2>
                         <div></div>
                     </InfoUser>
                     <MenuDiv>
@@ -25,8 +42,8 @@ export default function UserPage() {
                             <FiHeart size={IconSize} color="red" />
                             <Link
                                 to="/usuario/favoritos"
-                                onClick={() => setSelectedOption("Favoritos")}
-                                style={{ textDecoration: selectedOption === "Favoritos" ? "underline red" : "none" }}
+                                onClick={() => setSelectedOption("favoritos")}
+                                style={{ textDecoration: selectedOption === "favoritos" ? "underline red" : "none" }}
                             >
                                 Favoritos
                             </Link>
@@ -34,7 +51,7 @@ export default function UserPage() {
                         <OptionDiv>
                             <FaCar size={IconSize} color="blue" />
                             <Link
-                                to="/usuario/meus-anuncios"
+                                to="/usuario/anuncios"
                                 onClick={() => setSelectedOption("Meus Anúncios")}
                                 style={{ textDecoration: selectedOption === "Meus Anúncios" ? "underline red" : "none" }}
                             >
@@ -53,11 +70,33 @@ export default function UserPage() {
                         </OptionDiv>
                     </MenuDiv>
                 </Options>
+                <List>
+                {(selectedOption === 'favoritos') ?
+                user.favorites.map((car) => <CarCard key={car.id} id={car.id} car={car} />)
+                :
+                user.userSales.map((car) => <CarCard key={car.id} id={car.id} car={car} />)
+                }
+                </List>
             </ContainerUserInfo>
+
         </ContainerSale>
     );
 }
 
+function formatCPF(cpf) {
+    const cleanCPF = cpf.replace(/\D/g, '');
+    return cleanCPF.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+}
+function formatPhoneNumber(phoneNumber) {
+    const cleanNumber = phoneNumber.replace(/\D/g, '');
+    if (cleanNumber.length === 10) {
+        return cleanNumber.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+    } else if (cleanNumber.length === 11) {
+        return cleanNumber.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    } else {
+        return cleanNumber;
+    }
+}
 
 const ContainerSale = styled.div`
     width: 100vw; 
@@ -73,7 +112,7 @@ const ContainerUserInfo = styled.div`
     margin-top: 64px;
 `
 const Options = styled.div`
-    width: 300px; 
+    width: 17%; 
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -116,3 +155,12 @@ const OptionDiv = styled.div`
 `;
 
 const IconSize = 20;
+
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 83%;
+  padding: 30px;
+`;

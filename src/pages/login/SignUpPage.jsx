@@ -28,7 +28,6 @@ export default function SignUpPage(){
     function submitCadastro(e){
         e.preventDefault();
         setIsLoading(true);
-        console.log(formCadastro);
         
         if(formCadastro.password != formCadastro.confirmPass){
         alert("As senhas estão diferentes!");
@@ -41,7 +40,6 @@ export default function SignUpPage(){
         const promise = api.signUp(info);
 
         promise.then(() => {
-        console.log("DEU CERTO AQUI");
         setIsLoading(false);
         navigate("/login");
         });

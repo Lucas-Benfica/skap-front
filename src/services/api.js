@@ -25,13 +25,15 @@ function createCar(body, token){
 
 function addFavorites(id, token){
     const config = createConfig(token);
-    const promise = axios.post(`${URL}/favorites/add/${id}`, config);
+    const body = {id};
+    const promise = axios.post(`${URL}/favorites/add/${id}`, body, config);
     return promise;
 }
 
 function removeFavorites(id, token){
     const config = createConfig(token);
-    const promise = axios.post(`${URL}/favorites/remove/${id}`, config);
+    const body = {id};
+    const promise = axios.post(`${URL}/favorites/remove/${id}`,body, config);
     return promise;
 }
 

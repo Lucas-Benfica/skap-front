@@ -33,7 +33,7 @@ export default function Header(){
                 <div className="UserOptions">
                     {logged ? (
                         <div>
-                            <HiUserCircle onClick={()=>navigate("/usuario")}/>
+                            <HiUserCircle onClick={()=>navigate("/usuario/favoritos")}/>
                         </div>
                     ) : (
                         <div>
