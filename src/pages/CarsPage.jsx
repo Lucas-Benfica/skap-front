@@ -17,6 +17,7 @@ export default function CarsPage({ cars, setCars }) {
 
         const promise = api.getCarsList();
         promise.then((res) => {
+            console.log(res.data);
             if (filtro) {
                 const filterList = res.data.filter(car => car.category == filtro);
                 setCars(filterList);
@@ -29,6 +30,7 @@ export default function CarsPage({ cars, setCars }) {
         promise.catch((err) => {
             alert(err.response.data);
         });
+
 
     }, []);
 
@@ -52,7 +54,7 @@ export default function CarsPage({ cars, setCars }) {
     return (
         <ContainerPageCarros>
             <div>
-                <Header/>
+                <Header />
                 <SecondHeader>
                     <div>
                         {/*<StyledIcon />*/}
@@ -63,7 +65,9 @@ export default function CarsPage({ cars, setCars }) {
             </div>
             <ContainerProdutos>
                 <h1>Carros usados e seminovos de todo o Brasil</h1>
-                {cars.map((car) => <CarCard key={car.id} id={car.id} car={car} />)}
+                {cars.filter(car => !car.sold).map(car => (
+                    <CarCard key={car.id} id={car.id} car={car} />
+                ))}
             </ContainerProdutos>
         </ContainerPageCarros>
     );
