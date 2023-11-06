@@ -2,6 +2,8 @@
 
 O Skap é uma plataforma de venda de veículos usados que permite aos usuários anunciar, visualizar ofertas, favoritar anúncios e entrar em contato com os vendedores. O projeto é composto por um front-end desenvolvido em React, um back-end em Node.js e utiliza um banco de dados SQL.
 
+Link back-end: https://github.com/Lucas-Benfica/skap-api
+
 ## Funcionalidades Principais
 
 - **Anúncios de Veículos Usados**: Os usuários podem anunciar veículos usados, fornecendo todas as informações necessárias sobre o carro.
