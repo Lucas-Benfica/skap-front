@@ -1,4 +1,4 @@
-# Skap - Plataforma de Venda de Veículos Usados
+# Skap - Plataforma de Anúncios de Veículos Usados
 
 O Skap é uma plataforma de venda de veículos usados que permite aos usuários anunciar, visualizar ofertas, favoritar anúncios e entrar em contato com os vendedores. O projeto é composto por um front-end desenvolvido em React, um back-end em Node.js e utiliza um banco de dados SQL.
 
