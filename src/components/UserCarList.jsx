@@ -17,13 +17,13 @@ export default function CarList({ user }) {
 
     const handleDelete = (carId) => {
         const promise = api.deleteSale(carId, auth);
-            promise.then((res) => {
-                alert(res.data);
-                window.location.reload();
-            });
-            promise.catch((err) => {
-                alert(err.response.data);
-            });
+        promise.then((res) => {
+            alert(res.data);
+            window.location.reload();
+        });
+        promise.catch((err) => {
+            alert(err.response.data);
+        });
     };
 
     const handleConfirm = (carId, carSold) => {
@@ -48,6 +48,14 @@ export default function CarList({ user }) {
             });
         }
     };
+
+    if (user.userSales == undefined) {
+        return (
+            <>
+                <h1>Meus anúncios</h1>
+            </>
+        )
+    }
 
     return (
         <>
