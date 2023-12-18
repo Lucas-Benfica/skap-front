@@ -6,7 +6,6 @@ import CarList from "./UserCarList";
 export default function DivCarsUser({ selectedOption, user }) {
 
     const [cars, setCars] = useState();
-    console.log(cars);
 
     if(cars == undefined){
         return (

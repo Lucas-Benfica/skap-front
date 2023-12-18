@@ -8,7 +8,7 @@ import api from "../services/api";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-const ex = {
+const carObject = {
     name: "",
     description: "",
     year: "",
@@ -32,7 +32,7 @@ const ex = {
 
 export default function CarSale() {
     const { id } = useParams();
-    const [car, setCar] = useState(ex);
+    const [car, setCar] = useState(carObject);
     const [isHeartActive, setIsHeartActive] = useState(false);
     const { auth } = useAuth();
     const navigate = useNavigate();

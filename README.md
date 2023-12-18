@@ -42,6 +42,46 @@ Para utilizar o aplicativo:
    
 7. Para favoritar ou criar um anúncio, você deve estar logado.
 
+Claro, aqui está o texto final em formato Markdown:
+
+# Executando o Projeto Localmente
+
+Para executar este projeto localmente, siga as instruções abaixo:
+
+## 1. Baixar ou Clonar o Repositório
+
+Primeiro, baixe o repositório usando o botão de download ou clone-o.
+
+## 2. Instalar Dependências
+
+Navegue até a pasta do projeto e execute o seguinte comando para instalar as dependências:
+
+```bash
+npm install
+```
+
+## 3. Configurar o Arquivo .env
+
+Crie um arquivo chamado `.env` na pasta do projeto e insira as informações de acesso ao back-end/API. Essas informações podem incluir o link para o deploy ou o localhost, e podem ser encontradas no repositório do back-end. Exemplo de conteúdo do arquivo `.env`:
+
+```env
+VITE_API_URL = LINK API
+```
+
+## 4. Rodar o Projeto
+
+Após configurar o arquivo `.env`, execute o projeto usando o seguinte comando:
+
+```bash
+npm run dev
+```
+
+No console, você verá um link para um localhost onde o projeto está rodando.
+
+Vale lembrar que se você estiver utilizando um banco de dados próprio, o site pode não exibir anúncios prévios e algumas funcionalidades podem não funcionar sem carros anunciados no banco de dados.
+
+Tenha certeza de seguir as instruções do back-end para configurar o banco de dados adequadamente antes de rodar o projeto.
+
 ## Contato
 
 Para dúvidas ou sugestões, entre em contato pelo e-mail lucassoaresbenfica@gmail.com.

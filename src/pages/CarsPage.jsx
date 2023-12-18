@@ -17,7 +17,6 @@ export default function CarsPage({ cars, setCars }) {
 
         const promise = api.getCarsList();
         promise.then((res) => {
-            console.log(res.data);
             if (filtro) {
                 const filterList = res.data.filter(car => car.category == filtro);
                 setCars(filterList);
